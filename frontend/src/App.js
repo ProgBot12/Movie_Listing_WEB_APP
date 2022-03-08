@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Router, Routes, Route, Link } from "react-router-dom";
+import { Router, Routes, Route, Link, Switch } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
@@ -42,27 +42,21 @@ function App() {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      <Router>
-        <Routes>
-          <Route
-            exact
-            path={["/", "/movies"]}
-            component={<MoviesList />}
-          ></Route>
-          <Route
-            path="/movies/:id/review"
-            render={(props) => <AddReview {...props} user={user} />}
-          ></Route>
-          <Route
-            path="movies/:id"
-            render={(props) => <Movie {...props} user={user} />}
-          ></Route>
-          <Route
-            path="/login"
-            render={(props) => <Login {...props} login={login} />}
-          ></Route>
-        </Routes>
-      </Router>
+      <Switch>
+        <Route exact path={["/", "/movies"]} component={MoviesList}></Route>
+        <Route
+          path="/movies/:id/review"
+          render={(props) => <AddReview {...props} user={user} />}
+        ></Route>
+        <Route
+          path="movies/:id"
+          render={(props) => <Movie {...props} user={user} />}
+        ></Route>
+        <Route
+          path="/login"
+          render={(props) => <Login {...props} login={login} />}
+        ></Route>
+      </Switch>
     </div>
   );
 }
